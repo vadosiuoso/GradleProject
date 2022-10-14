@@ -1,0 +1,31 @@
+plugins {
+    id 'java'
+}
+
+group 'org.example'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'com.google.code.gson:gson:2.9.0'
+    implementation 'cn.nikeo.jsonBuilder:jsonBuilder:0.2.0'
+    implementation 'com.github.holgerbrandl:jsonbuilder:0.9'
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.9.0'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.9.0'
+    implementation 'com.google.code.gson:gson-parent:2.9.1'
+}
+
+test {
+    useJUnitPlatform()
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'App'
+    }
+    from configurations.compileClasspath.collect {
+        it.isDirectory() ? it : zipTree(it) }
+}
